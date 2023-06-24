@@ -1,4 +1,4 @@
-// Database (Koala_Holla) Connection
+// Database (Koala_Holla_Web_App) Connection
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
@@ -6,7 +6,7 @@ const router = express.Router();
 // GET all koalas from the database
 router.get('/', (req, res) => {
   // write SQL query and save that in a variable
-  const queryText = 'SELECT * FROM "Koalas";';
+  const queryText = 'SELECT * FROM "KoalasWebApp";';
   // send SQL query to the database using pool.query
   pool.query(queryText)
     // best practice is to use the word 'result' to describe
@@ -35,7 +35,7 @@ router.get('/:id', (req, res) => {
     // specified (parameter) id
   const idToGet = req.params.id;
 
-  const query = 'SELECT * FROM "Koalas" WHERE id = $1;';
+  const query = 'SELECT * FROM "KoalasWebApp" WHERE id = $1;';
   // use pool.query to access pool 
     // (group of connections between server and database)
   pool.query(query, [idToGet])
@@ -60,7 +60,7 @@ router.post('/', (req, res) => {
   const newKoala = req.body;
   console.log('Adding koala', newKoala);
   // Insert and use parameterization for POST
-  const queryText = `INSERT INTO "Koalas" ("name", "age", "gender", "ready_to_transfer", "notes")
+  const queryText = `INSERT INTO "KoalasWebApp" ("name", "age", "gender", "ready_to_transfer", "notes")
                      VALUES ($1, $2, $3, $4, $5);`;
 
   const koalaParams = [
@@ -90,7 +90,7 @@ router.post('/', (req, res) => {
 // PUT koala ready_to_transfer value to 'Y' for a specific ID
 router.put('/:id', (req, res) => {
   const idToUpdate = req.params.id;
-  const query = `UPDATE "Koalas" SET "ready_to_transfer" = 'Y' WHERE "id" = $1;`;
+  const query = `UPDATE "KoalasWebApp" SET "ready_to_transfer" = 'Y' WHERE "id" = $1;`;
 
   pool
     .query(query, [idToUpdate])
@@ -109,7 +109,7 @@ router.delete('/:id', (req, res) => {
   const idToDelete = req.params.id;
   // Use query parameterization to protect the 
     // database from SQL injection
-  const query = `DELETE FROM "Koalas" WHERE "id" = $1`;
+  const query = `DELETE FROM "KoalasWebApp" WHERE "id" = $1`;
 
   // Connect/talk with the database and run the query
   pool.query(query, [idToDelete])
