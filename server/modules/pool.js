@@ -6,7 +6,7 @@ const pg = require("pg");
 // pg is the dependency that interacts with pool
 const pool = new pg.Pool({
   //name the database
-  database: "Koala_Holla",
+  database: "Koala_Holla_Web_App",
   // Where is your database? localhost === on your computer
   host: "localhost",
   // Postgres listening on port 5432
